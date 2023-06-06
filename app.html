@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Automation - OSIVA</title>
+    <link rel="stylesheet" href="./style2.css" />
+    <link rel="icon" href="./istockphoto-1218148871-612x612.jpg">
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+  </head>
+  <body>
+    <h1>Home Automation - OSIVA</h1>
+    <div class="main">
+    <div class="container">
+    <div class="coloumn">
+    <button class="button-13" id="button1">Fan</button>
+    <br>
+    <button class="button-13" id="button2">AC</button>
+    <br>
+    <button class="button-13" id="button3">LED</button>
+    <br>
+    <button class="button-13" id="button4">Cooler</button>
+    </div>
+    <div class="coloumn">
+    <button class="button-13" id="button5">off</button>
+    <br>
+    <button class="button-13" id="button6">off</button>
+    <br>
+    <button class="button-13" id="button7">off</button>
+    <br>
+    <button class="button-13" id="button8">off</button>
+    </div>
+    </div>
+  </div>
+    <script>
+      // Initialize Firebase
+      var firebaseConfig = {
+        apiKey: "AIzaSyBcEFWGPwXZrGsASHYTBaP_SIFf3uV94uM",
+        authDomain: "smart-home-automation-14fd3.firebaseapp.com",
+        databaseURL: "https://smart-home-automation-14fd3-default-rtdb.firebaseio.com",
+        projectId: "smart-home-automation-14fd3",
+        storageBucket: "smart-home-automation-14fd3.appspot.com",
+        messagingSenderId: "946209251485",
+        appId: "1:946209251485:web:5a35d7df4b1fbe2dacf474",
+        measurementId: "G-EGYMSSNGN8"
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      // Create a reference to your database
+      var database = firebase.database();
+
+      // Add a listener to the buttons
+      document.getElementById("button1").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button1").set(true);
+      });
+
+      document.getElementById("button2").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button2").set(true);
+      });
+
+      document.getElementById("button3").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button3").set(true);
+      });
+
+      document.getElementById("button4").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button4").set(true);
+      });
+
+
+      document.getElementById("button5").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button1").set(false);
+      });
+
+      document.getElementById("button6").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button2").set(false);
+      });
+
+      document.getElementById("button7").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button3").set(false);
+      });
+
+      document.getElementById("button8").addEventListener("click", function(event) {
+        // Update the state of the button in the database
+        database.ref("buttons/button4").set(false);
+      });
+
+      // Add a listener to the buttons state
+      database.ref("buttons").on("value", function(snapshot) {
+        // Get the state of the buttons from the snapshot
+        var buttons = snapshot.val();
+
+        // Update the state of the buttons on the page
+        document.getElementById("button1").disabled = !buttons.button1;
+        document.getElementById("button2").disabled = !buttons.button2;
+        document.getElementById("button3").disabled = !buttons.button3;
+        document.getElementById("button4").disabled = !buttons.button4;
+        document.getElementById("button5").disabled = !buttons.button1;
+        document.getElementById("button6").disabled = !buttons.button2;
+        document.getElementById("button7").disabled = !buttons.button3;
+        document.getElementById("button8").disabled = !buttons.button4;
+      });
+    </script>
+  </body>
+</html>
